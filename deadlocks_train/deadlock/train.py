@@ -1,7 +1,10 @@
+import random
+
 import time
 
 
 def move_train(train, distance, crossings):
+    # time.sleep(random.randrange(0, 4))
     while train.front < distance:
         train.front += 1
         for crossing in crossings:
