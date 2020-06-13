@@ -16,10 +16,10 @@ class TrainAnim:
         self.train1 = Line(Point(470, 10), Point(470, 10-train_length))
         self.train2 = Line(Point(790, 470), Point(790+train_length, 470))
         self.train3 = Line(Point(330, 790), Point(330, 790+train_length))
-        self.draw_train(win, self.train0, 'red')
-        self.draw_train(win, self.train1, 'blue')
-        self.draw_train(win, self.train2, 'yellow')
-        self.draw_train(win, self.train3, 'green')
+        self.draw_train(win, self.train0, color_rgb(233, 33, 40))
+        self.draw_train(win, self.train1, color_rgb(78, 151, 210))
+        self.draw_train(win, self.train2, color_rgb(251, 170, 26))
+        self.draw_train(win, self.train3, color_rgb(11, 132, 54))
 
     def update_trains(self, trains):
         current_x = self.train0.getP2().getX() - 10 + self.train_length
@@ -33,11 +33,11 @@ class TrainAnim:
 
 
     def draw_track(self, win, line):
-        line.setFill("white")
+        line.setFill(color_rgb(185, 185, 185))
         line.setWidth(4)
         line.draw(win)
 
     def draw_train(self, win, line, colour):
         line.setFill(colour)
-        line.setWidth(10)
+        line.setWidth(14)
         line.draw(win)
