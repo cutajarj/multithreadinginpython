@@ -32,7 +32,7 @@ def move_train(train, distance, crossings):
         train.front += 1
         for crossing in crossings:
             if train.front == crossing.position:
-                lock_intersections_in_distance(train.id, crossing.position,
+                lock_intersections_in_distance(train.uid, crossing.position,
                                                crossing.position + train.train_length, crossings)
             back = train.front - train.train_length
             if back == crossing.position:

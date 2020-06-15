@@ -10,7 +10,7 @@ def move_train(train, distance, crossings):
         for crossing in crossings:
             if train.front == crossing.position:
                 crossing.intersection.mutex.acquire()
-                crossing.intersection.locked_by = train.id
+                crossing.intersection.locked_by = train.uid
             back = train.front - train.train_length
             if back == crossing.position:
                 crossing.intersection.mutex.release()
