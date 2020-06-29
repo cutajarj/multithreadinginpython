@@ -4,27 +4,26 @@ import time
 
 def red_robot(lock1, lock2):
     while True:
-        print("Red: Acquiring lock1...")
+        print("Red: Acquiring lock 1...")
         lock1.acquire()
-        print("Red: Acquiring lock2...")
+        print("Red: Acquiring lock 2...")
         lock2.acquire()
-        print("Red: Locks Acquired")
-        lock2.release()
+        print("Red: Locks acquired...")
         lock1.release()
-        print("Red: Locks Released")
+        lock2.release()
+        print("Red: Locks released")
         time.sleep(0.5)
-
 
 def blue_robot(lock1, lock2):
     while True:
-        print("Blue: Acquiring lock2...")
+        print("Blue: Acquiring lock 2...")
         lock2.acquire()
-        print("Blue: Acquiring lock1...")
+        print("Blue: Acquiring lock 1...")
         lock1.acquire()
-        print("Blue: Locks Acquired")
-        lock2.release()
+        print("Blue: Locks acquired...")
         lock1.release()
-        print("Blue: Locks Released")
+        lock2.release()
+        print("Blue: Locks released")
         time.sleep(0.5)
 
 
@@ -34,5 +33,6 @@ red = Thread(target=red_robot, args=(mutex1, mutex2))
 blue = Thread(target=blue_robot, args=(mutex1, mutex2))
 red.start()
 blue.start()
+
 
 

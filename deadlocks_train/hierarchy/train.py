@@ -14,7 +14,6 @@ def lock_intersections_in_distance(id, reserve_start, reserve_end, crossings):
         intersection.locked_by = id
         time.sleep(0.01)
 
-
 def move_train(train, distance, crossings):
     while train.front < distance:
         train.front += 1
@@ -24,6 +23,6 @@ def move_train(train, distance, crossings):
                                                crossing.position + train.train_length, crossings)
             back = train.front - train.train_length
             if back == crossing.position:
-                crossing.intersection.mutex.release()
                 crossing.intersection.locked_by = -1
+                crossing.intersection.mutex.release()
         time.sleep(0.01)
