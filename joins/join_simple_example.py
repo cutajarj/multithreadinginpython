@@ -5,7 +5,7 @@ from threading import Thread
 def child():
     print("Child Thread doing work...")
     time.sleep(5)
-    print("Child Thread Done...")
+    print("Child Thread done...")
 
 
 def parent():

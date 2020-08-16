@@ -8,7 +8,7 @@ matches = []
 
 def file_search(root, filename):
     print("Searching in:", root)
-    threads = []
+    child_threads = []
     for file in os.listdir(root):
         full_path = join(root, file)
         if filename in file:
@@ -18,8 +18,8 @@ def file_search(root, filename):
         if isdir(full_path):
             t = Thread(target=file_search, args=([full_path, filename]))
             t.start()
-            threads.append(t)
-    for t in threads:
+            child_threads.append(t)
+    for t in child_threads:
         t.join()
 
 
@@ -28,7 +28,7 @@ def main():
     t.start()
     t.join()
     for m in matches:
-        print("Matched:", m),
+        print("Matched:", m)
 
 
 main()
