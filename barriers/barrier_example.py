@@ -13,8 +13,8 @@ def wait_on_two_barriers(name, time_to_sleep):
     print(name, "is finished")
 
 
-red = Thread(target=wait_on_two_barriers, args=(["red", 4]))
-blue = Thread(target=wait_on_two_barriers, args=(["blue", 10]))
+red = Thread(target=wait_on_two_barriers, args=["red", 4])
+blue = Thread(target=wait_on_two_barriers, args=["blue", 10])
 red.start()
 blue.start()
 # time.sleep(8)
