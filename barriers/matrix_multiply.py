@@ -3,8 +3,8 @@ from random import Random
 from threading import Barrier, Thread
 
 matrix_size = 200
-matrixA = [[0] * matrix_size for a in range(matrix_size)]
-matrixB = [[0] * matrix_size for b in range(matrix_size)]
+matrix_a = [[0] * matrix_size for a in range(matrix_size)]
+matrix_b = [[0] * matrix_size for b in range(matrix_size)]
 result = [[0] * matrix_size for r in range(matrix_size)]
 random = Random()
 work_start = Barrier(matrix_size + 1)
@@ -22,7 +22,7 @@ def work_out_row(row):
         work_start.wait()
         for col in range(matrix_size):
             for i in range(matrix_size):
-                result[row][col] = result[row][col] + matrixA[row][i] * matrixB[i][col]
+                result[row][col] += matrix_a[row][i] * matrix_b[i][col]
         complete.wait()
 
 
@@ -30,8 +30,9 @@ for row in range(matrix_size):
     Thread(target=work_out_row, args=([row])).start()
 start = time.time()
 for t in range(10):
-    generate_random_matrix(matrixA)
-    generate_random_matrix(matrixB)
+    generate_random_matrix(matrix_a)
+    generate_random_matrix(matrix_b)
+    result = [[0] * matrix_size for r in range(matrix_size)]
     work_start.wait()
     complete.wait()
 end = time.time()

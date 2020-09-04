@@ -8,8 +8,8 @@ matrix_size = 200
 # matrixB = [[1, -2, -1],
 #            [0, 5, 4],
 #            [-1, -2, 3]]
-matrixA = [[0] * matrix_size for a in range(matrix_size)]
-matrixB = [[0] * matrix_size for b in range(matrix_size)]
+matrix_a = [[0] * matrix_size for a in range(matrix_size)]
+matrix_b = [[0] * matrix_size for b in range(matrix_size)]
 result = [[0] * matrix_size for r in range(matrix_size)]
 random = Random()
 
@@ -22,14 +22,15 @@ def generate_random_matrix(matrix):
 
 start = time.time()
 for t in range(10):
-    generate_random_matrix(matrixA)
-    generate_random_matrix(matrixB)
+    generate_random_matrix(matrix_a)
+    generate_random_matrix(matrix_b)
+    result = [[0] * matrix_size for r in range(matrix_size)]
     for row in range(matrix_size):
         for col in range(matrix_size):
             for i in range(matrix_size):
-                result[row][col] = result[row][col] + matrixA[row][i] * matrixB[i][col]
-    # for row in range(matrix_size):
-    #     print(matrixA[row], matrixB[row], result[row])
-    # print()
+                result[row][col] += + matrix_a[row][i] * matrix_b[i][col]
+#     for row in range(matrix_size):
+#         print(matrix_a[row], matrix_b[row], result[row])
+#     print()
 end = time.time()
 print("Done, time taken", end - start)
