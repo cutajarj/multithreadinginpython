@@ -14,7 +14,7 @@ def print_array_contents(array):
 if __name__ == '__main__':
     multiprocessing.set_start_method('spawn')
 #    arr = [1] * 10
-    arr = multiprocessing.Array('i', [-1] * 10)
+    arr = multiprocessing.Array('i', [-1] * 10) # lock=true
     p = Process(target=print_array_contents, args=([arr]))
     p.start()
     for j in range(10):

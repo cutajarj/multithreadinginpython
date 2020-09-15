@@ -2,10 +2,10 @@ import time
 from random import Random
 
 matrix_size = 200
-# matrixA = [[3, 1, -4],
+# matrix_a = [[3, 1, -4],
 #            [2, -3, 1],
 #            [5, -2, 0]]
-# matrixB = [[1, -2, -1],
+# matrix_b = [[1, -2, -1],
 #            [0, 5, 4],
 #            [-1, -2, 3]]
 matrix_a = [[0] * matrix_size for a in range(matrix_size)]
