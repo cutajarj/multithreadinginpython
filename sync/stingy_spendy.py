@@ -22,9 +22,7 @@ class StingySpendy:
 
 
 ss = StingySpendy()
-st = Thread(target=ss.stingy, args=())
-sp = Thread(target=ss.spendy, args=())
-st.start()
-sp.start()
+Thread(target=ss.stingy, args=()).start()
+Thread(target=ss.spendy, args=()).start()
 time.sleep(5)
 print("Money in the end", ss.money)
