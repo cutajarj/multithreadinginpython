@@ -21,6 +21,6 @@ class WaitGroup:
 
     def wait(self):
         self.cv.acquire()
-        if self.wait_count > 0:
+        while self.wait_count > 0:
             self.cv.wait()
         self.cv.release()
