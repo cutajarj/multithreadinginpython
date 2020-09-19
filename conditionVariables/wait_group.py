@@ -2,9 +2,8 @@ from threading import Condition
 
 
 class WaitGroup:
-    def __init__(self):
-        self.wait_count=0
-        self.cv = Condition()
+    wait_count=0
+    cv = Condition()
 
     def add(self, count):
         self.cv.acquire()

@@ -17,9 +17,9 @@ def file_search(root, filename, wait_group):
             matches.append(full_path)
             mutex.release()
         if isdir(full_path):
+            wait_group.add(1)
             t = Thread(target=file_search, args=([full_path, filename, wait_group]))
             t.start()
-            wait_group.add(1)
     wait_group.done()
 
 
