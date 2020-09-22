@@ -28,7 +28,7 @@ for t in range(10):
     for row in range(matrix_size):
         for col in range(matrix_size):
             for i in range(matrix_size):
-                result[row][col] += + matrix_a[row][i] * matrix_b[i][col]
+                result[row][col] += matrix_a[row][i] * matrix_b[i][col]
 #     for row in range(matrix_size):
 #         print(matrix_a[row], matrix_b[row], result[row])
 #     print()
