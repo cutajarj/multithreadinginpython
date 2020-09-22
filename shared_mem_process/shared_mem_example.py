@@ -6,8 +6,7 @@ import time
 
 def print_array_contents(array):
     while True:
-        for i in range(len(array)):
-            print(array[i])
+        print(*array, sep = ", ")
         time.sleep(1)
 
 
