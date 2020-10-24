@@ -5,7 +5,7 @@ from threading import Thread
 
 finished_count = 0
 
-
+#TODO add locks
 def count_letters(url, frequency):
     response = urllib.request.urlopen(url)
     txt = str(response.read())
