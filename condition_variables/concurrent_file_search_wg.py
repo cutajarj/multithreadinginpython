@@ -2,7 +2,7 @@ import os
 from os.path import isdir, join
 from threading import Lock, Thread
 
-from conditionVariables.wait_group import WaitGroup
+from condition_variables.wait_group import WaitGroup
 
 mutex = Lock()
 matches = []
