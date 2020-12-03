@@ -1,7 +1,8 @@
 import os
 import re
-
 from os.path import join
+
+import time
 
 
 def parse_to_array(text):
@@ -42,7 +43,7 @@ def mine_wind_distribution(winds, wind_dist):
                 wind_dist[i] += 1
         elif valid_wind.match(wind):
             d = int(wind_dir_only.match(wind).group(1))
-            dir_index = round(d/45.0) % 8
+            dir_index = round(d / 45.0) % 8
             wind_dist[dir_index] += 1
     return wind_dist
 
@@ -50,10 +51,13 @@ def mine_wind_distribution(winds, wind_dist):
 if __name__ == "__main__":
     path_with_files = "../metarfiles"
     wind_dist = [0] * 8
+    start = time.time()
     for file in os.listdir(path_with_files):
         f = open(join(path_with_files, file), "r")
         text = f.read()
         metars = parse_to_array(text)
         winds = extract_wind_direction(metars)
         wind_dist = mine_wind_distribution(winds, wind_dist)
+    end = time.time()
     print(wind_dist)
+    print("Time taken", end - start)
