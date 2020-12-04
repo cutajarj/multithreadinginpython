@@ -3,20 +3,20 @@ from multiprocessing import Process, Pipe
 import time
 
 
-def ping(pipe):
+def ping(pipe_conn):
     while (True):
-        pipe.send(["Ping", time.time()])
-        pong = pipe.recv()
+        pipe_conn.send(["Ping", time.time()])
+        pong = pipe_conn.recv()
         print(pong)
         time.sleep(1)
 
 
-def pong(pipe):
+def pong(pipe_conn):
     while (True):
-        ping = pipe.recv()
+        ping = pipe_conn.recv()
         print(ping)
         time.sleep(1)
-        pipe.send(["Pong", time.time()])
+        pipe_conn.send(["Pong", time.time()])
 
 
 if __name__ == "__main__":
