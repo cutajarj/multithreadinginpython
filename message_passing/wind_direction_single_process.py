@@ -4,13 +4,14 @@ from os.path import join
 
 import time
 
-WIND_REGEX = re.compile("\d* METAR.*EGLL \d*Z [A-Z ]*(\d{5}KT|VRB\d{2}KT).*=")
-VARIABLE_WIND_REGEX = re.compile(".*VRB\d{2}KT")
-VALID_WIND_REGEX = re.compile("\d{5}KT")
-WIND_DIR_ONLY_REGEX = re.compile("(\d{3})\d{2}KT")
-TAF_REGEX = re.compile(".*TAF.*")
-COMMENT_REGEX = re.compile("\w*#.*")
-METAR_CLOSE_REGEX = re.compile(".*=")
+WIND_REGEX = "\d* METAR.*EGLL \d*Z [A-Z ]*(\d{5}KT|VRB\d{2}KT).*="
+WIND_EX_REGEX = "(\d{5}KT|VRB\d{2}KT)"
+VARIABLE_WIND_REGEX = ".*VRB\d{2}KT"
+VALID_WIND_REGEX = "\d{5}KT"
+WIND_DIR_ONLY_REGEX = "(\d{3})\d{2}KT"
+TAF_REGEX = ".*TAF.*"
+COMMENT_REGEX = "\w*#.*"
+METAR_CLOSE_REGEX = ".*="
 
 
 def parse_to_array(text):
@@ -18,11 +19,11 @@ def parse_to_array(text):
     metar_str = ""
     metars = []
     for line in lines:
-        if TAF_REGEX.search(line):
+        if re.search(TAF_REGEX, line):
             break
-        if not COMMENT_REGEX.search(line):
+        if not re.search(COMMENT_REGEX, line):
             metar_str += line.strip()
-        if METAR_CLOSE_REGEX.search(line):
+        if re.search(METAR_CLOSE_REGEX, line):
             metars.append(metar_str)
             metar_str = ""
     return metars
@@ -31,19 +32,19 @@ def parse_to_array(text):
 def extract_wind_direction(metars):
     winds = []
     for metar in metars:
-        m = WIND_REGEX.match(metar)
-        if m:
-            winds.append(m.group(1))
+        if re.search(WIND_REGEX, metar):
+            for token in metar.split():
+                if re.match(WIND_EX_REGEX, token): winds.append(re.match(WIND_EX_REGEX, token).group(1))
     return winds
 
 
 def mine_wind_distribution(winds, wind_dist):
     for wind in winds:
-        if VARIABLE_WIND_REGEX.match(wind):
+        if re.search(VARIABLE_WIND_REGEX, wind):
             for i in range(8):
                 wind_dist[i] += 1
-        elif VALID_WIND_REGEX.match(wind):
-            d = int(WIND_DIR_ONLY_REGEX.match(wind).group(1))
+        elif re.search(VALID_WIND_REGEX, wind):
+            d = int(re.match(WIND_DIR_ONLY_REGEX, wind).group(1))
             dir_index = round(d / 45.0) % 8
             wind_dist[dir_index] += 1
     return wind_dist
