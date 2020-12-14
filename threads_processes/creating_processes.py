@@ -1,5 +1,5 @@
 import multiprocessing
-import time
+
 from multiprocessing.context import Process
 
 
@@ -16,4 +16,3 @@ if __name__ == '__main__':
     for _ in range(5):
         p = Process(target=do_work, args=())
         p.start()
-
