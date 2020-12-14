@@ -24,7 +24,7 @@ def find_area(points_queue):
 
 
 if __name__ == "__main__":
-    queue = Queue()
+    queue = Queue(maxsize=1000)
     processes = []
     for i in range(TOTAL_PROCESSES):
         p = Process(target=find_area, args=(queue,))
