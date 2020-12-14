@@ -1,6 +1,5 @@
 import json
 import urllib.request
-
 import time
 
 
@@ -21,8 +20,8 @@ def main():
     for i in range(1000, 1020):
         count_letters(f"https://www.rfc-editor.org/rfc/rfc{i}.txt", frequency)
     end = time.time()
-    print("Done, time taken", end - start)
     print(json.dumps(frequency, indent=4))
+    print("Done, time taken", end - start)
 
 
 main()
