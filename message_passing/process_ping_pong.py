@@ -19,9 +19,7 @@ def pong(pipe_conn):
         pipe_conn.send(["Pong", time.time()])
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     pipe_end_a, pipe_end_b = Pipe()
-    p1 = Process(target=ping, args=(pipe_end_a,))
-    p2 = Process(target=pong, args=(pipe_end_b,))
-    p1.start()
-    p2.start()
+    Process(target=ping, args=(pipe_end_a,)).start()
+    Process(target=pong, args=(pipe_end_b,)).start()
