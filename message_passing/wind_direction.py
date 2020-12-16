@@ -53,10 +53,10 @@ def mine_wind_distribution(winds_conn, wind_dist_conn):
     winds = winds_conn.recv()
     while winds is not None:
         for wind in winds:
-            if re.match(VARIABLE_WIND_REGEX, wind):
+            if re.search(VARIABLE_WIND_REGEX, wind):
                 for i in range(8):
                     wind_dist[i] += 1
-            elif re.match(VALID_WIND_REGEX, wind):
+            elif re.search(VALID_WIND_REGEX, wind):
                 d = int(re.match(WIND_DIR_ONLY_REGEX, wind).group(1))
                 dir_index = round(d / 45.0) % 8
                 wind_dist[dir_index] += 1
@@ -64,14 +64,14 @@ def mine_wind_distribution(winds_conn, wind_dist_conn):
     wind_dist_conn.send(wind_dist)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     text_conn_a, text_conn_b = Pipe()
     metars_conn_a, metars_conn_b = Pipe()
     winds_conn_a, winds_conn_b = Pipe()
     winds_dist_conn_a, winds_dist_conn_b = Pipe()
-    Process(target=parse_to_array, args=(text_conn_b,metars_conn_a)).start()
-    Process(target=extract_wind_direction, args=(metars_conn_b,winds_conn_a)).start()
-    Process(target=mine_wind_distribution, args=(winds_conn_b,winds_dist_conn_a)).start()
+    Process(target=parse_to_array, args=(text_conn_b, metars_conn_a)).start()
+    Process(target=extract_wind_direction, args=(metars_conn_b, winds_conn_a)).start()
+    Process(target=mine_wind_distribution, args=(winds_conn_b, winds_dist_conn_a)).start()
     path_with_files = "../metarfiles"
     start = time.time()
     for file in os.listdir(path_with_files):
