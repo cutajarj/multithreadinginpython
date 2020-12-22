@@ -1,6 +1,6 @@
 import multiprocessing
 
-from multiprocessing.context import Process
+from multiprocessing import Process
 
 
 def do_work():
