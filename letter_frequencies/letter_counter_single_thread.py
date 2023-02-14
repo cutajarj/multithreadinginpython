@@ -1,9 +1,11 @@
 import json
 import urllib.request
 import time
-
+import ssl
+import certifi
 
 def count_letters(url, frequency):
+    ssl._create_default_https_context = lambda: ssl.create_default_context(cafile=certifi.where())
     response = urllib.request.urlopen(url)
     txt = str(response.read())
     for l in txt:
