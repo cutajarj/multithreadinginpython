@@ -2,11 +2,14 @@ import json
 import urllib.request
 import time
 from threading import Thread, Lock
+import ssl
+import certifi
 
 finished_count = 0
 
 
 def count_letters(url, frequency, mutex):
+    ssl._create_default_https_context = lambda: ssl.create_default_context(cafile=certifi.where())
     response = urllib.request.urlopen(url)
     txt = str(response.read())
     mutex.acquire()
